@@ -1,0 +1,239 @@
+//namePrefix und additionalName noch nicht in das Schema integriert, 
+//das ist jetzt so eigerichtet, dass es eine Kombination von Namen mit einem Startelement preferred/alterntive bearbeitet, daher startet es bei [1] und nicht [0].
+//Als Trenner wird | verwendet, zwischen den Teilausdrücken einer Namenskombination steht das in Strings selten auftretende §
+
+//prefix
+{
+    "@context": {
+        "gndo": "https://d-nb.info/standards/elementset/gnd#",
+        "rdfs": "https://www.w3.org/2000/01/rdf-schema#",
+        "dc": "http://purl.org/dc/terms/",
+        "owl": "http://www.w3.org/2002/07/owl#",
+        "schema": "https://schema.org/"
+    },
+    "dc:dataset": {
+        "dc:dateSubmitted": "ISO_DATE",
+        "dc:creator": "Michael Markert",
+        "dc:source": {
+            "rdfs:literal": "FactGrid",
+            "dc:identifier": null
+            },
+        "dc:software": null,   
+        "dc:publisher": {
+            "rdfs:literal": null,
+            "dc:identifier": null
+            },    
+        "dc:contributor": {
+            "rdfs:literal": null,
+            "dc:identifier": null
+            },
+        "dc:description": "Personen mit Markierung Datensatzverdruss-Ohne Normdaten",
+        "dc:sizeOrDuration": 658
+    },
+    "gndo:differentiatedPerson": [
+
+//row separator
+,
+
+//suffix
+]
+}
+
+//row template
+{
+"dc:identifier": {{jsonize(cells['recordID'].value)}},
+"gndo:preferredNameOfThePerson": {
+    "@type": "Person",
+    {{with(cells["nameOfThePerson"].value.split("|")[0], v,
+    "\n\"gndo\:forename\"\:" + if(v.split(";")[1] != "§", jsonize(v.split(";")[1]), "null") + "\," +
+    "\n\"gndo\:surname\"\:" + if(v.split(";")[0] != "§", jsonize(v.split(";")[0]), "null") + "\," +
+    "\n\"gndo\:personalName\"\:" + if(v.split(";")[2] != "§", jsonize(v.split(";")[2]), "null") + "\," +
+    "\n\"gndo\:nameAddition\"\:" + if(v.split(";")[3] != "§", jsonize(v.split(";")[3]), "null") + "\," +
+    "\n\"gndo\:prefix\"\:" + "null" + "\," +
+    "\n\"gndo\:counting\"\:" + if(v.split(";")[4] != "§", jsonize(v.split(";")[4]), "null") + "\," +
+    "\n\"schema\:additionalName\"\:" + "null"
+    )}}
+    },
+"gndo:variantNameOfThePerson": [
+    {{forEachIndex(cells["nameOfThePerson"].value.split("|"), i, v,
+    if(cells["nameOfThePerson"].value.split("|").length()==1,'
+    \{
+    \"@type\"\: \"Person\",    
+    \"gndo:forename\"\: null,
+    \"gndo:surname\"\: null,
+    \"gndo:personalName\"\: null,
+    \"gndo:nameAddition\"\: null,
+    \"gndo:prefix\"\: null,
+    \"gndo:counting\"\: null,
+    \"schema:additionalName\"\: null
+    \}
+    ', '') +
+    if(i !=0, with(cells["nameOfThePerson"].value.split("|")[i], v,
+    "{" + "\n\"gndo\:forename\"\:" + if(v.split(";")[1] != "§", jsonize(v.split(";")[1]), "null") + "\," +
+    "\n\"gndo\:surname\"\:" + if(v.split(";")[0] != "§", jsonize(v.split(";")[0]), "null") + "\," +
+    "\n\"gndo\:personalName\"\:" + if(v.split(";")[2] != "§", jsonize(v.split(";")[2]), "null") + "\," +
+    "\n\"gndo\:nameAddition\"\:" + if(v.split(";")[3] != "§", jsonize(v.split(";")[3]), "null") + "\," +
+    "\n\"gndo\:prefix\"\:" + "null" + "\," +
+    "\n\"gndo\:counting\"\:" + if(v.split(";")[4] != "§", jsonize(v.split(";")[4]), "null") + "\," +
+    "\n\"schema\:additionalName\"\:" + "null" +
+    "\n\}" +
+    if(cells["nameOfThePerson"].value.split("|").length()!=i+1,'\,\n    ','')
+    ), "")
+    )}}
+    ],
+"gndo:affiliation": [
+    {{forNonBlank(cells["affiliation"], v, 
+    forEachIndex(cells["affiliation"].value.split("|"), i, v, 
+    "\{
+    \"rdfs\:literal\"\:" + jsonize(v) + 
+    ",\n\"gndo\:gndIdentifier\"\: null
+    \}" + 
+    if(cells["affiliation"].value.split("|").length()!=i+1,'\,\n    ',''))
+    , "\{
+    \"rdfs\:literal\"\: null,
+    \"gndo\:gndIdentifier\"\: null
+    \}")}}
+    ],
+"gndo:gender": {
+    "rdfs:literal": {{forNonBlank(cells["gender"], v, jsonize(v.value), "null")}},
+    "gndo:gndIdentifier": null
+    },
+"gndo:professionOrOccupation": [
+    {{forNonBlank(cells["professionOrOccupation"], v, 
+    forEachIndex(cells["professionOrOccupation"].value.split("|"), i, v, 
+    "\{
+    \"rdfs\:literal\"\:" + jsonize(v) + 
+    ",\n\"gndo\:gndIdentifier\"\: null
+    \}" + 
+    if(cells["professionOrOccupation"].value.split("|").length()!=i+1,'\,\n    ',''))
+    , "\{
+    \"rdfs\:literal\"\: null,
+    \"gndo\:gndIdentifier\"\: null
+    \}")}}
+    ],
+"gndo:functionOrRole": [
+    {{forNonBlank(cells["functionOrRole"], v, 
+    forEachIndex(cells["functionOrRole"].value.split("|"), i, v, 
+    "\{
+    \"rdfs\:literal\"\:" + jsonize(v) + 
+    ",\n\"gndo\:gndIdentifier\"\: null
+    \}" + 
+    if(cells["functionOrRole"].value.split("|").length()!=i+1,'\,\n    ','')
+    )
+    , "\{
+    \"rdfs\:literal\"\: null,
+    \"gndo\:gndIdentifier\"\: null
+    \}")}}
+    ],
+"gndo:academicDegree": {{forNonBlank(cells["academicDegree"], v, jsonize(v.value), "null")}},
+"gndo:titleOfNobility": {
+    "rdfs:literal": {{forNonBlank(cells["titleOfNobility"], v, jsonize(v.value), "null")}},
+    "gndo:gndIdentifier": null
+    },
+"gndo:placeOfBirth": [
+    {{forNonBlank(cells["placeOfBirth"], v, 
+    forEachIndex(cells["placeOfBirth"].value.split("|"), i, v, 
+    "\{" +
+    if(v.split(";")[0] != "§", "\n\"rdfs\:literal\"\:" +
+    jsonize(v.split(";")[0]),'\n\"rdfs\:literal\"\: null')  +
+    "\," +
+    if(v.split(";")[1] != "§", "\n\"gndo\:gndIdentifier\"\:" +
+    jsonize(v.split(";")[1]),'\n\"gndo\:gndIdentifier\"\: null')  +
+    "\}" +
+    if(cells["placeOfBirth"].value.split("|").length()!=i+1,'\,\n    ',''))
+    , "\{
+    \"rdfs\:literal\"\: null,
+    \"gndo\:gndIdentifier\"\: null
+    \}")}}
+    ], 
+"gndo:dateOfBirth": {
+    "schema:date": {{if(cells['dateOfBirth'].value.split("|")[0] != "§",
+    jsonize(cells['dateOfBirth'].value.split("|")[0]),'null')}},
+    "rdfs:literal": {{if(cells['dateOfBirth'].value.split("|")[1] != "§",
+    jsonize(cells['dateOfBirth'].value.split("|")[1]),'null')}}
+},
+"gndo:placeOfDeath": [
+    {{forNonBlank(cells["placeOfDeath"], v, 
+    forEachIndex(cells["placeOfDeath"].value.split("|"), i, v, 
+    "\{" +
+    if(v.split(";")[0] != "§", "\n\"rdfs\:literal\"\:" +
+    jsonize(v.split(";")[0]),'\n\"rdfs\:literal\"\: null')  +
+    "\," +
+    if(v.split(";")[1] != "§", "\n\"gndo\:gndIdentifier\"\:" +
+    jsonize(v.split(";")[1]),'\n\"gndo\:gndIdentifier\"\: null')  +
+    "\}" +
+    if(cells["placeOfDeath"].value.split("|").length()!=i+1,'\,\n    ',''))
+    , "\{
+    \"rdfs\:literal\"\: null,
+    \"gndo\:gndIdentifier\"\: null
+    \}")}}
+    ],
+"gndo:dateOfDeath": {
+    "schema:date": {{if(cells['dateOfDeath'].value.split(";")[0] != "§",
+    jsonize(cells['dateOfDeath'].value.split(";")[0]),'null')}},
+    "rdfs:literal": {{if(cells['dateOfDeath'].value.split(";")[1] != "§",
+    jsonize(cells['dateOfDeath'].value.split(";")[1]),'null')}}
+    },
+"gndo:associatedPlace": [
+    {{forNonBlank(cells["associatedPlace"], v, 
+    forEachIndex(cells["associatedPlace"].value.split("|"), i, v, 
+    "\{" +
+    if(v.split(";")[1] != "§", "\n\"rdfs\:literal\"\:" +
+    jsonize(v.split(";")[1]),'\n\"rdfs\:literal\"\: null')  +
+    "\," +
+    if(v.split(";")[0] != "§", "\n\"gndo\:gndIdentifier\"\:" +
+    jsonize(v.split(";")[0]),'\n\"gndo\:gndIdentifier\"\: null')  +
+    "\}" +
+    if(cells["associatedPlace"].value.split("|").length()!=i+1,'\,\n    ',''))
+    , "\{
+    \"rdfs\:literal\"\: null,
+    \"gndo\:gndIdentifier\"\: null
+    \}")}}
+    ],
+"gndo:periodOfActivity": [
+    {{forNonBlank(cells["periodOfActivity"], v, 
+    forEachIndex(cells["periodOfActivity"].value.split("|"), i, v, 
+    "\{" +
+    if(v.split(";")[0] != "§", "\n\"schema\:date\"\:" +
+    jsonize(v.split(";")[0]),'\n\"schema\:date\"\: null')  +
+    "\," +
+    if(v.split(";")[1] != "§", "\n\"rdfs\:literal\"\:" +
+    jsonize(v.split(";")[1]),'\n\"rdfs\:literal\"\: null')  +
+    "\}" +
+    if(cells["periodOfActivity"].value.split("|").length()!=i+1,'\,\n    ',''))
+    , "\{
+    \"schema\:date\"\: null,
+    \"rdfs\:literal\"\: null
+    \}")}}
+    ],
+"gndo:biographicalOrHistoricalInformation": [
+    {{forNonBlank(cells["miscellaneousNote"], v, 
+    forEachIndex(cells["miscellaneousNote"].value.split("|"), i, v, 
+    "\{
+    \"rdfs:label\": \"miscellaneousNote\",     
+    \"rdfs\:literal\"\:" + jsonize(v) + 
+    "\n\},\n"
+    ), "")}}
+    {
+    "rdfs:label": {{forNonBlank(cells["education"], v, "\"education\"", "null")}},
+    "rdfs:literal": {{forNonBlank(cells["education"], v, jsonize(v.value), "null")}}
+    }
+    ],    
+"owl:sameAs": [
+    {{forNonBlank(cells["identifier"], v, 
+    forEachIndex(cells["identifier"].value.split("|"), i, v, 
+    "\{" +
+    "\n\"dc\:source\"\:" +
+    jsonize(v.split(";")[1]) +
+    "\," +
+    "\n\"dc\:identifier\"\:" +
+    jsonize(v.split(";")[0])  +
+    "\}" +
+    if(cells["identifier"].value.split("|").length()!=i+1,'\,\n    ',''))
+    , "\{
+    \"dc\:source\"\: null,
+    \"dc\:identifier\"\: null
+    \}")}}
+    ],
+"gndo:geographicAreaCode": {{forNonBlank(cells["geographicAreaCode"], v, jsonize(v.value), "null")}}
+}

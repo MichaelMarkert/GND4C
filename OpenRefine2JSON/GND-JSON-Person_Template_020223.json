@@ -1,0 +1,127 @@
+{
+    "@context": {
+        "gndo": "https://d-nb.info/standards/elementset/gnd#",
+        "rdfs": "https://www.w3.org/2000/01/rdf-schema#",
+        "dc": "http://purl.org/dc/terms/",
+        "owl": "http://www.w3.org/2002/07/owl#",
+        "schema": "https://schema.org/"
+    },
+    "dc:dataset": {
+        "dc:dateSubmitted": "ISO_DATE",
+        "dc:creator": "STRING",
+        "dc:source": {
+            "rdfs:literal": "STRING",
+            "dc:identifier": "STRING"
+            },
+        "dc:software": "STRING",   
+        "dc:publisher": {
+            "rdfs:literal": "STRING",
+            "dc:identifier": "STRING"
+            },    
+        "dc:contributor": {
+            "rdfs:literal": "STRING",
+            "dc:identifier": "STRING"
+            },
+        "dc:description": "STRING",
+        "dc:sizeOrDuration": "INTEGER"
+    },
+    "gndo:differentiatedPerson": [
+        {
+            "dc:identifier": "STRING",
+            "gndo:preferredNameOfThePerson": {
+                "@type": "Person",
+                "gndo:forename": "STRING",
+			    "gndo:surname": "STRING",
+                "gndo:personalName": "STRING",
+                "gndo:nameAddition": "STRING",
+                "gndo:prefix": "STRING",
+                "gndo:counting": "STRING",
+                "schema:additionalName": "STRING"
+                },
+            "gndo:variantNameOfThePerson": [
+                {
+                "@type": "Person",    
+                "gndo:forename": "STRING",
+                "gndo:surname": "STRING",
+                "gndo:personalName": "STRING",
+                "gndo:nameAddition": "STRING",
+                "gndo:prefix": "STRING",
+                "gndo:counting": "STRING",
+                "schema:additionalName": "STRING"
+                }
+            ],
+            "gndo:gender": {
+                "rdfs:literal": "STRING",
+                "gndo:gndIdentifier": "URI"
+                },
+            "gndo:professionOrOccupation": [
+                {
+                "rdfs:literal": "STRING",
+                "gndo:gndIdentifier": "URI"
+                }
+                ],
+            "gndo:functionOrRole": [
+                {
+                "rdfs:literal": "STRING",
+                "gndo:gndIdentifier": "URI"
+                }
+                ],
+            "gndo:affiliation": [
+                {
+                "rdfs:literal": "STRING",
+                "gndo:gndIdentifier": "URI"
+                }
+                ],
+            "gndo:academicDegree": "STRING",
+            "gndo:titleOfNobility": {
+                "rdfs:literal": "STRING",
+                "gndo:gndIdentifier": "URI"
+                },
+            "gndo:placeOfBirth": [
+                {
+                "rdfs:literal": "STRING",
+                "gndo:gndIdentifier": "URI"
+                }
+            ],      
+            "gndo:dateOfBirth": {
+                "schema:date": "ISO_Date",
+                "rdfs:literal": "String"
+            },
+            "gndo:placeOfDeath": [
+                {
+                "rdfs:literal": "STRING",
+                "gndo:gndIdentifier": "URI"
+                }
+            ],  
+            "gndo:dateOfDeath": {
+                "schema:date": "ISO_Date",
+                "rdfs:literal": "String"
+            },
+            "gndo:associatedPlace": [
+                {
+                "rdfs:literal": "STRING",
+                "gndo:gndIdentifier": "URI"
+                }
+            ],
+            "gndo:periodOfActivity": [
+                {
+                    "schema:date": "ISO_Date",
+                    "rdfs:literal": "String"
+                }
+            ],
+            "gndo:biographicalOrHistoricalInformation": [
+                {
+                "rdfs:label": "STRING",
+                "rdfs:literal": "STRING"
+                }
+            ],    
+            "owl:sameAs": [
+                {
+                "dc:source": "STRING",
+                "dc:identifier": "URI"
+                }
+            ],
+            "gndo:geographicAreaCode": "URI"
+        }
+    ]
+}
