@@ -23,7 +23,7 @@ The folder contains
     - ";" is used as a separator for labes and identifiers for an element
     - "|" is used as a separator between different values of repeating elements
     - Example: ` Technischer Zeichner;4059260-1|Animezeichner;§ `
-    - Names can have up to six elements at the moment, if names are only made out of forname and surename, they need to be provided as ` surname;forname;§;§;§;§ ` 
+    - Names can have up to six elements at the moment to fit the needs of delivering institutions (forename, surname, personalName, nameAddition, counting, prefix). If names are made out of forname and surename only, they need to be provided as ` surname;forname;§;§;§;§ `. Via ` alternativeName ` unstructured names can be imported, e.g. all name elements merged to one column in OpenRefine. 
 5. Paste the script elements to the form in Export=>Templating. Do not copy the comments (marked with "//") as they are visible in the exported .txt-file.
 6. Validate the exported json, e.g. using https://jsoncrack.com/editor or https://jsonformatter.org/
 7. Import to the GND4C-toolbox using the Private Data Import (you need an account provided by the GND agency responsible for your institution).
