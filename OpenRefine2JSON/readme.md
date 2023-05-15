@@ -3,16 +3,16 @@
 
 ## *English version*
 
-Custom exporter script to generate complex JSON with repeating elements for GND4C workflows from an OpenRefine project via the Templating Export. 
+Custom exporter script to generate complex JSON with nonrepeating and repeating elements for GND4C workflows from an OpenRefine project via the Templating Export. 
 The folder contains 
 - a demo dataset (person entities from the wikibase instance FactGrid (https://database.factgrid.de/wiki/Main_Page) to import to OpenRefine, 
 - a JSON template of all processed elements (not a JSON schema!), and 
-- a file with the script for Export=>Templating... containing all four elements needed for the OpenRefine export form
+- a file containing all script blocks needed for Export=>Templating...
 
 ### Comment on the current state
 
 - the script is work in progress
-- for testing purposes every element gets exported even when it is empty 
+- for testing purposes every relevant element gets exported even when it is empty 
 
 ### Steps
 
