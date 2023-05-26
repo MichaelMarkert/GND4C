@@ -11,7 +11,7 @@ The folder contains
 
 ### Comment on the current state
 
-- the script is work in progress
+- template and script are work in progress - some elements were not used up to now (like GND identifiers for affiliations) so they are not represented in the exporter script
 - for testing purposes every relevant element gets exported even when it is empty 
 
 ### Steps
