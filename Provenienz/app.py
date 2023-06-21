@@ -151,7 +151,7 @@ def search_gbv(searchterm):
 
 # set up the Streamlit app
 
-st.title("GND-Provenienmerkmale mit Bild")
+st.title("GND-Provenienzmerkmale")
 
 col1, col2 = st.columns([2,1])
 
