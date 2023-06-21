@@ -7,6 +7,6 @@ Das Python-Script läuft nach Start im Terminal als Webserver im Browser. Die Su
 
 1. Die im Script angegebenen Bibliotheken installieren, sofern nicht vorhanden.
 2. Im Scriptordner einen Unterordner "static" für den Bildcache anlegen
-3. Streamlit-App starten mit dem Befehl streamlit run app.py mit einem Terminal im Ordner starten
+3. Streamlit-App starten mit dem Befehl streamlit run app.py mit einem Terminal im App-Ordner
 
-https://github.com/MichaelMarkert/GND4C/assets/101104547/815968c4-dfcb-4e05-b126-3c67be08a16f
+https://github.com/MichaelMarkert/GND4C/assets/101104547/26da60a7-eb5e-49fa-9777-9b526ffd0e8f
