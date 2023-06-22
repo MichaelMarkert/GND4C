@@ -2,6 +2,7 @@
 
 ## Überblick
 Das Python-Script läuft nach Start im Terminal als Webserver im Browser. Die Suche wird via lobid.org auf die GND durchgeführt. Aus den GND-Datensätzen werden die URLs für die Bildquellen geparst und dann die zugehörigen Bilder aus derzeit zwei Quellen geharvestet: dem GBV-Provenienz-Wiki (https://provenienz.gbv.de/) und der Deutschen Fotothek (https://www.deutschefotothek.de/). Um den Prozess etwas zu beschleunigen, werden alle Bilder verkleinert im Unterordner "static" gecacht und bei neuen Suchen daraus geladen. Eine Suche nach mehreren Hundert Provenienzmerkmalen dauert lokal zumindest bei der ersten Abfrage der Bilddaten einige Minuten.
+Derzeit gibt es zwei Abfragemodi: Eine reguläre Suche mit Begriffen sowie eine direkte Abfrage von GND-IDs, die als kommagetrennte Liste in den Suchschlitz kopiert werden können.
 
 ## Installation
 
