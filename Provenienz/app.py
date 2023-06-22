@@ -20,9 +20,18 @@ st.markdown("""
                 padding-top: 0rem;
             }
             div.css-1y4p8pa {
+                padding: 1rem 1rem 5rem;
                 width: 100%;
+                }
+            @media (min-width: 756px) {
+                div.css-1y4p8pa {
                 padding: 1rem 1rem 5rem;
                 max-width: 60%;
+                }
+            }    
+            div.css-16idsys p {
+                font-size: 16px;
+                font-weight: bold;
             }
             </style>""", unsafe_allow_html=True)
 
@@ -172,12 +181,12 @@ col1, col2 = st.columns([2,1])
 
 # create a text input for the search term
 with col1:
-    searchterm = st.text_input("Suchbegriffe", "Jena Stempel Universität")
+    searchterm = st.text_input("Suchbegriffe/IDs", "Jena Stempel Universität")
     st.write("Suche über lobid mit \"\~\" auch unscharf möglich, z. B. \"leipzik~ stenpel~\".  \n Listen von GND-IDs in der Form \"117464012X,1096198665,1273284453,1266422757\" eingeben.")
 
 with col2:
-    response_size = st.selectbox('Maximalzahl der Treffer', [1, 10, 50, 250, 1000])
-    search_type = st.selectbox('Reguläre Suche oder Liste mit GND-IDs', ['Suche', 'ID-Liste'])
+    search_type = st.radio('Reguläre Suche oder Liste mit GND-IDs', ['Suche', 'ID-Liste'])
+    response_size = st.selectbox('Maximalzahl der Treffer bei Suche', [1, 10, 50, 250, 1000])
 
 response_size = str(response_size)
 
