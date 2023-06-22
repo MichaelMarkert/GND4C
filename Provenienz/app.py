@@ -36,16 +36,28 @@ except FileNotFoundError:
 def search_gbv(searchterm):
     gnd_ids = []
     gnd_labels = []
-    gbv_ids = []
 
-    url = "https://lobid.org/gnd/search?q=" + searchterm + "&filter=type:ProvenanceCharacteristic&format=json&size=" + response_size
+    if search_type == "Suche":
 
-    response = requests.get(url)
-    json_data = response.json()
+        url = "https://lobid.org/gnd/search?q=" + searchterm + "&filter=type:ProvenanceCharacteristic&format=json&size=" + response_size
 
-    for item in json_data['member']:
-        gnd_ids.append(item['gndIdentifier'])
-        gnd_labels.append(item['preferredName'])
+        response = requests.get(url)
+        json_data = response.json()
+
+        for item in json_data['member']:
+            gnd_ids.append(item['gndIdentifier'])
+            gnd_labels.append(item['preferredName'])
+
+    if search_type == "ID-Liste":
+        gnd_ids = searchterm.split(', ')
+        searchterm = ', '.join(['"{0}"'.format(x) for x in gnd_ids])
+        url = 'https://lobid.org/gnd/reconcile/'
+        data = {'extend':'{"ids":[' + searchterm + '],"properties":[{"id":"preferredName"}]}'}
+        response = requests.post(url, data=data)
+        response = response.json()
+        str_list = [entry['str'] for row in response['rows'].values() for entry in row['preferredName']]
+
+        gnd_labels = str_list        
 
     df = pd.DataFrame({'gnd_id': gnd_ids, 'gnd_label': gnd_labels})
 
@@ -161,9 +173,11 @@ col1, col2 = st.columns([2,1])
 # create a text input for the search term
 with col1:
     searchterm = st.text_input("Suchbegriffe", "Jena Stempel Universität")
+    st.write("Suche über lobid mit \"\~\" auch unscharf möglich, z. B. \"leipzik~ stenpel~\".  \n Listen von GND-IDs in der Form \"117464012X, 1096198665, 1273284453, 1266422757\" eingeben.")
 
 with col2:
     response_size = st.selectbox('Maximalzahl der Treffer', [1, 10, 50, 250, 1000])
+    search_type = st.selectbox('Reguläre Suche oder Liste mit GND-IDs', ['Suche', 'ID-Liste'])
 
 response_size = str(response_size)
 
