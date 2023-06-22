@@ -114,9 +114,12 @@ def search_gbv(searchterm):
                 try:
                     response = requests.get(link)
                     html_content = response.content
-                    soup = BeautifulSoup(html_content, 'html.parser')   
-                    download_link = soup.find('a', {'class': 'download'})
-                    download_link = download_link['href']
+                    soup = BeautifulSoup(html_content, 'html.parser')
+                    div_tag = soup.find('div', class_='listItemThumbnail')
+                    img_tag = div_tag.find('img')
+                    download_link = img_tag['src']
+                    #download_link = soup.find('a', {'class': 'download'})
+                    #download_link = download_link['href']
                     filepath = "static/" + download_link.split("/")[-1]
                     if filepath not in filelist:
                         image_url = download_link
