@@ -49,7 +49,7 @@ def search_gbv(searchterm):
             gnd_labels.append(item['preferredName'])
 
     if search_type == "ID-Liste":
-        gnd_ids = searchterm.split(', ')
+        gnd_ids = searchterm.split(',')
         searchterm = ', '.join(['"{0}"'.format(x) for x in gnd_ids])
         url = 'https://lobid.org/gnd/reconcile/'
         data = {'extend':'{"ids":[' + searchterm + '],"properties":[{"id":"preferredName"}]}'}
@@ -173,7 +173,7 @@ col1, col2 = st.columns([2,1])
 # create a text input for the search term
 with col1:
     searchterm = st.text_input("Suchbegriffe", "Jena Stempel Universität")
-    st.write("Suche über lobid mit \"\~\" auch unscharf möglich, z. B. \"leipzik~ stenpel~\".  \n Listen von GND-IDs in der Form \"117464012X, 1096198665, 1273284453, 1266422757\" eingeben.")
+    st.write("Suche über lobid mit \"\~\" auch unscharf möglich, z. B. \"leipzik~ stenpel~\".  \n Listen von GND-IDs in der Form \"117464012X,1096198665,1273284453,1266422757\" eingeben.")
 
 with col2:
     response_size = st.selectbox('Maximalzahl der Treffer', [1, 10, 50, 250, 1000])
