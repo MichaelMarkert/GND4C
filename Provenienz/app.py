@@ -6,6 +6,7 @@ import streamlit as st
 from PIL import Image
 from bs4 import BeautifulSoup
 from io import BytesIO
+import re
 
 pd.set_option('display.max_colwidth', 30)
 pd.set_option('display.max_columns', None)
@@ -23,7 +24,7 @@ st.markdown("""
                 padding: 1rem 1rem 5rem;
                 width: 100%;
                 }
-            @media (min-width: 756px) {
+            @media (min-width: 768px) {
                 div.css-1y4p8pa {
                 padding: 1rem 1rem 5rem;
                 max-width: 60%;
@@ -87,6 +88,7 @@ def search_gbv(searchterm):
                     link = subfield.text
                     # check if the link contains the target string
                     if "provenienz.gbv.de" in link:
+                        link = re.sub('images\/.*\/', 'Datei:', link)
                         gbv_found = True
                         return(link)
             if gbv_found == False:
