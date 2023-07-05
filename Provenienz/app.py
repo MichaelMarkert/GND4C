@@ -7,6 +7,7 @@ from PIL import Image
 from bs4 import BeautifulSoup
 from io import BytesIO
 import re
+import urllib.parse
 
 pd.set_option('display.max_colwidth', 30)
 pd.set_option('display.max_columns', None)
@@ -110,8 +111,10 @@ def search_gbv(searchterm):
         if link != None:   
             if "provenienz.gbv.de" in link:
                 filepath = "static/" + link.replace('https://provenienz.gbv.de/Datei:','').replace('http://provenienz.gbv.de/Datei:','')
+                filepath = urllib.parse.unquote(filepath)
                 if filepath not in filelist:
                     image_url = link.replace('https://provenienz.gbv.de/','https://provenienz.gbv.de/Special:FilePath/').replace('http://provenienz.gbv.de/','https://provenienz.gbv.de/Special:FilePath/')
+                    
                     response = requests.get(image_url)
                     try:
                         image = Image.open(BytesIO(response.content))
