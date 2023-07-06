@@ -1,5 +1,3 @@
 requests
 pandas
 bs4
-re
-urllib.parse
