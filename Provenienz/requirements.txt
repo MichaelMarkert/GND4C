@@ -1,5 +1,4 @@
 requests
-xml.etree.ElementTree
 pandas
 PIL
 bs4
