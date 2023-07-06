@@ -1,6 +1,5 @@
 requests
 pandas
 bs4
-io
 re
 urllib.parse
