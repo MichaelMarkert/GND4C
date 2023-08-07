@@ -1,0 +1,144 @@
+{
+    "@context": {
+        "gndo": "https://d-nb.info/standards/elementset/gnd#",
+        "rdfs": "https://www.w3.org/2000/01/rdf-schema#",
+        "dc": "http://purl.org/dc/terms/",
+        "owl": "http://www.w3.org/2002/07/owl#",
+        "schema": "https://schema.org/"
+    },
+    "dc:dataset": {
+        "dc:dateSubmitted": "ISO_DATE",
+        "dc:creator": "STRING",
+        "dc:source": {
+            "rdfs:literal": "STRING",
+            "dc:identifier": "STRING"
+            },
+        "dc:software": "STRING",   
+        "dc:publisher": {
+            "rdfs:literal": "STRING",
+            "dc:identifier": "STRING"
+            },    
+        "dc:contributor": {
+            "rdfs:literal": "STRING",
+            "dc:identifier": "STRING"
+            },
+        "dc:description": "STRING",
+        "dc:sizeOrDuration": "INTEGER"
+    },
+    "gndo:buildingOrMemorial": [
+        {
+            "@type":"LandmarksOrHistoricalBuildings",
+            "dc:identifier": "STRING", 
+            "owl:sameAs": "URI",
+            "schema:dateModified": "ISO_DATE",
+            "gndo:placeOrGeographicName": "STRING",
+            "gndo:preferredNameForThePlaceOrGeographicName": "STRING",
+            "gndo:variantNameForThePlaceOrGeographicName": "STRING",
+            "schema:alternateName": "STRING",
+            "gndo:place": {
+                "rdfs:literal": "STRING",
+                "gndo:abbreviatedNameForThePlaceOrGeographicName": "STRING",
+                "gndo:gndIdentifier": "URI"
+                }, 
+            "gndo:hierarchicalSuperiorOfPlaceOrGeographicName": {
+                "rdfs:literal": "STRING",
+                "gndo:gndIdentifier": "URI"
+                },
+            "gndo:relatedPlaceOrGeographicName": [
+                {
+                "rdfs:literal": "STRING",
+                "gndo:gndIdentifier": "URI"
+                }
+                ],
+            "gndo:Country": {
+                "rdfs:literal": "STRING",
+                "gndo:gndIdentifier": "URI"
+                },
+            "gndo:professionalRelationship": [
+                {
+                "gndo:preferredNameOfThePerson": {
+                "@type": "Person",        
+                "gndo:forename": "STRING",
+                "gndo:surname": "STRING",
+                "gndo:personalName": "STRING",
+                "gndo:nameAddition": "STRING",
+                "gndo:prefix": "STRING",
+                "gndo:counting": "STRING",
+                "schema:additionalName": "STRING"
+                },
+                "gndo:titleOfNobility": {
+                    "rdfs:literal": "STRING",
+                    "gndo:gndIdentifier": "URI"
+                    },
+                "gndo:professionOrOccupation": [
+                    {
+                    "rdfs:literal": "STRING",
+                    "gndo:gndIdentifier": "URI"
+                    }
+                    ],
+                "gndo:gndIdentifier": "URI"
+                }
+            ],
+            "gndo:relatedCorporateBody":{
+                "rdfs:literal": "STRING",
+                "gndo:gndIdentifier": "URI"
+                },
+            "gndo:dateOfProduction": {
+                "schema:date": "ISO_Date",
+                "rdfs:literal": "String"
+            },
+            "gndo:dateOfEstablishment": {
+                "schema:date": "ISO_Date",
+                "rdfs:literal": "String"
+            },
+            "gndo:dateOfEstablishmentAndTermination": {
+                "schema:date": "ISO_Date",
+                "rdfs:literal": "String"
+            },
+            "gndo:dateOfTermination": {
+                "schema:date": "ISO_Date",
+                "rdfs:literal": "String"
+            },
+            "gndo:biographicalOrHistoricalInformation": "STRING",
+            "schema:description": "STRING",
+            "schema:address": {
+                "@type": "PostalAddress",
+                "schema:streetAddress": "STRING",
+                "schema:postalCode": "STRING"
+                },
+            "schema:geo": {
+                "@type": "GeoCoordinates",
+                "schema:latitude": "FLOAT",
+                "schema:longitude": "FLOAT"
+                },
+            "gndo:gndSubjectCategory":  [
+                {
+                "rdfs:literal": "STRING",
+                "gndo:gndIdentifier": "URI"
+                }
+            ],     
+            "gndo:relatedSubjectHeading": [ 
+                {
+                "@type":"LandmarksOrHistoricalBuildings",
+                "rdfs:literal": "STRING",
+                "gndo:gndIdentifier": "URI",
+                "schema:description": "STRING"
+                }
+            ],     
+            "gndo:broaderTermInstantial": {
+                "rdfs:literal": "STRING",
+                "gndo:gndIdentifier": "URI"
+                },
+            "gndo:broaderTermPartitive": {
+                "rdfs:literal": "STRING",
+                "gndo:gndIdentifier": "URI"
+                },
+            "gndo:gndIdentifier": "URI",
+            "dc:source":  {
+                "rdfs:literal": "STRING",
+                "dc:identifier": "URI"
+                },
+            "gndo:geographicAreaCode": "URI",
+        }
+    ]
+}
