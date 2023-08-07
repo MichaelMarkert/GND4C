@@ -1,0 +1,162 @@
+//Als Trenner wird | verwendet, zwischen den Teilausdrücken einer Namenskombination steht das in Strings selten auftretende §
+
+//prefix
+{
+    "@context": {
+        "gndo": "https://d-nb.info/standards/elementset/gnd#",
+        "rdfs": "https://www.w3.org/2000/01/rdf-schema#",
+        "dc": "http://purl.org/dc/terms/",
+        "owl": "http://www.w3.org/2002/07/owl#",
+        "schema": "https://schema.org/"
+    },
+    "dc:dataset": {
+        "dc:dateSubmitted": "2023-02-06",
+        "dc:creator": "Michael Markert",
+        "dc:source": {
+            "rdfs:literal": "DDK",
+            "dc:identifier": null
+            },
+        "dc:software": null,   
+        "dc:publisher": {
+            "rdfs:literal": null,
+            "dc:identifier": null
+            },    
+        "dc:contributor": {
+            "rdfs:literal": "Hanna Meiners",
+            "dc:identifier": null
+            },
+        "dc:description": "Dehio-Testdatenset",
+        "dc:sizeOrDuration": 100
+    },
+    "gndo:buildingOrMemorial": [
+
+//row separator
+,
+
+//suffix
+]
+}
+
+//row template
+{
+    "@type":"LandmarksOrHistoricalBuildings",
+    "dc:identifier": {{jsonize(cells['object_id'].value)}}, 
+    "owl:sameAs": {{jsonize(cells['data_source_uri'].value)}},
+    "schema:dateModified": {{forNonBlank(cells["updated_at"], v, jsonize(v.value), "null")}},
+    "gndo:gndIdentifier": {{forNonBlank(cells["gndIdentifier"], v, jsonize(v.value), "null")}},
+    "dc:source":  {
+        "rdfs:literal": null,
+        "dc:identifier": null
+        },
+    "gndo:placeOrGeographicName": null,
+    "gndo:preferredNameForThePlaceOrGeographicName": {{forNonBlank(cells["preferredName"], v, jsonize(v.value), "null")}},
+    "gndo:variantNameForThePlaceOrGeographicName": {{forNonBlank(cells["variantName"], v, jsonize(v.value), "null")}},
+    "schema:alternateName": {{forNonBlank(cells["alternateName"], v, jsonize(v.value), "null")}},
+    "gndo:place": {
+        "rdfs:literal": {{forNonBlank(cells["place"], v, jsonize(v.value), "null")}},
+        "gndo:abbreviatedNameForThePlaceOrGeographicName": {{forNonBlank(cells["abbreviatedNameForThePlaceOrGeographicName"], v, jsonize(v.value), "null")}},
+        "gndo:gndIdentifier": {{forNonBlank(cells["lido:placeID"], v, jsonize(v.value), "null")}}
+        }, 
+    "gndo:hierarchicalSuperiorOfPlaceOrGeographicName": {
+        "rdfs:literal": {{forNonBlank(cells["place (superordinate)"], v, jsonize(v.value), "null")}},
+        "gndo:gndIdentifier": null
+        },
+    "gndo:relatedPlaceOrGeographicName": [
+        {
+        "rdfs:literal": null,
+        "gndo:gndIdentifier": null
+        }
+        ],   
+    "gndo:Country": {
+        "rdfs:literal": null,
+        "gndo:gndIdentifier": null
+        },
+    "gndo:professionalRelationship": [
+        {
+        "gndo:preferredNameOfThePerson": {
+        "@type": "Person",        
+        "gndo:forename": null,
+        "gndo:surname": null,
+        "gndo:personalName": null,
+        "gndo:nameAddition": null,
+        "gndo:prefix": null,
+        "gndo:counting": null,
+        "schema:additionalName": null
+        },
+        "gndo:titleOfNobility": {
+            "rdfs:literal": null,
+            "gndo:gndIdentifier": null
+            },
+        "gndo:professionOrOccupation": [
+            {
+            "rdfs:literal": null,
+            "gndo:gndIdentifier": null
+            }
+            ],
+        "gndo:gndIdentifier": null
+        }
+    ],
+    "gndo:relatedCorporateBody":{
+        "rdfs:literal": null,
+        "gndo:gndIdentifier": null
+        },
+    "gndo:dateOfProduction": {
+        "schema:date": null,
+        "rdfs:literal": null
+    },
+    "gndo:dateOfEstablishment": {
+        "schema:date": null,
+        "rdfs:literal": null
+    },
+    "gndo:dateOfEstablishmentAndTermination": {
+        "schema:date": null,
+        "rdfs:literal": null
+    },
+    "gndo:dateOfTermination": {
+        "schema:date": null,
+        "rdfs:literal": null
+    },
+    "gndo:biographicalOrHistoricalInformation": null,
+    "schema:description": null,
+    "schema:address": {
+        "@type": "PostalAddress",
+        "schema:streetAddress": {{forNonBlank(cells["street"], v, jsonize(v.value), "null")}},
+        "schema:postalCode": null
+        },
+    "schema:geo": {
+        "@type": "GeoCoordinates",
+        "schema:latitude": {{forNonBlank(cells["lat"], v, jsonize(v.value), "null")}},
+        "schema:longitude": {{forNonBlank(cells["lon"], v, jsonize(v.value), "null")}}
+        },
+    "gndo:gndSubjectCategory":  [
+        {{forNonBlank(cells["subjectCategory"], v, 
+        forEachIndex(cells["subjectCategory"].value.split("|"), i, v, 
+        "\{
+        \"rdfs\:literal\"\:" + jsonize(v) + 
+        ",\n\"gndo\:gndIdentifier\"\: null
+        \}" + 
+        if(cells["subjectCategory"].value.split("|").length()!=i+1,'\,\n    ','')
+        )
+        , "\{
+        \"rdfs\:literal\"\: null,
+        \"gndo\:gndIdentifier\"\: null
+        \}")}}
+        ],
+    "gndo:relatedSubjectHeading": [ 
+        {
+        "@type":"LandmarksOrHistoricalBuildings",
+        "rdfs:literal": null,
+        "gndo:gndIdentifier": null,
+        "schema:description": null
+        }
+    ],     
+    "gndo:broaderTermInstantial": {
+        "rdfs:literal": {{forNonBlank(cells["objectWorkType"], v, jsonize(v.value), "null")}},
+        "gndo:gndIdentifier": {{forNonBlank(cells["GND-ID saz"], v, jsonize(v.value), "null")}}
+        },
+    "gndo:broaderTermPartitive": {
+        "rdfs:literal": null,
+        "gndo:gndIdentifier": null
+        },
+    "gndo:geographicAreaCode": {{forNonBlank(cells["geographicAreaCode"], v, jsonize(v.value), "null")}}
+}
