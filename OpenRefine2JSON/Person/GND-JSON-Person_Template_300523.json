@@ -105,8 +105,16 @@
             ],
             "gndo:periodOfActivity": [
                 {
+                "gndo:beginningOfPeriod": {
                     "schema:date": "ISO_Date",
-                    "rdfs:literal": "String"
+                    "rdfs:literal": null
+                    }
+                },
+                {
+                "gndo:endOfPeriod": {
+                    "schema:date": "ISO_Date",
+                    "rdfs:literal": null
+                    }
                 }
             ],
             "gndo:biographicalOrHistoricalInformation": [
