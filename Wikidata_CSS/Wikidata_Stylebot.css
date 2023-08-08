@@ -1,0 +1,166 @@
+/* header, title, menu */
+
+div#mw-head{
+  width: calc(100% - 11em);
+  margin-right:11em;
+  position: fixed;
+  background-image: linear-gradient(to bottom,#ffffff 50%,#f6f6f6 100%);
+}
+
+.wikibase-title {
+  font-family: sans-serif;
+  background-color: aliceblue;
+;
+  border-radius: 0.2em;
+  padding:0.2em;
+  margin-left: -0.2em;
+}
+
+.wikibase-title-id {
+  font-size: 1em;
+  color: #339966;
+}
+
+#mw-panel {
+  position: fixed;
+}
+
+#mw-panel > nav {
+  opacity: 0.3;
+  transition: all 1s;
+}
+
+#mw-panel:hover > nav {
+  opacity: 1;
+  transition: all 1s;
+}
+
+/* content design */
+
+div#content {
+  margin-right: 11em;
+}
+
+.vector-body {
+  line-height: 1.2;
+}
+.wikibase-entitytermsforlanguagelistview-cell { 
+  background-color: aliceblue;
+}
+
+h2.wb-section-heading {
+  margin-top: 0;
+  padding-left: 0;
+}
+
+.wikibase-statementgrouplistview .wikibase-statementlistview {
+  border-radius: 0.2em;
+}
+
+.wikibase-statementgrouplistview .wikibase-statementgroupview-property {
+  background-color:aliceblue;
+  border-radius: 0.2em;
+}
+
+.wikibase-statementview {
+  padding-bottom: 0;
+}
+
+.wikibase-snakview-value {
+  font-weight: bold;
+}
+
+h2#identifiers + div > div > div[id^="P"] .wikibase-snakview-value {
+  font-weight: normal;
+
+}
+
+.wikibase-statementgroupview {
+  margin-bottom: 0.5em;
+}
+
+.wikibase-statementlistview > .wikibase-toolbar-wrapper {
+  background-color: aliceblue;
+}
+
+/* custom colors for titles of predefined properties */
+
+/* ...for persons */
+div[id="P569"] .wikibase-statementgroupview-property, div[id="P19"] .wikibase-statementgroupview-property, div[id="P570"] .wikibase-statementgroupview-property, div[id="P20"] .wikibase-statementgroupview-property, div[id="P106"] .wikibase-statementgroupview-property {
+  background-color:lightblue;
+  padding: 0.2em;
+  margin-left: -0.2em;
+  border-radius: 0.2em;
+}
+
+/* ...for buildings/objects */
+
+div[id="P361"] .wikibase-statementgroupview-property, div[id="P571"] .wikibase-statementgroupview-property, div[id="P6375"] .wikibase-statementgroupview-property, div[id="P131"] .wikibase-statementgroupview-property, div[id="P17"] .wikibase-statementgroupview-property {
+  background-color: lightcyan;
+}
+
+/* ...for identifiers */
+
+div[id="P227"] .wikibase-statementgroupview-property-label a, div[id="P8168"] .wikibase-statementgroupview-property-label a, div[id="P791"] .wikibase-statementgroupview-property-label a, div[id="P1566"] .wikibase-statementgroupview-property-label a{
+  background-color:lightskyblue;
+  padding: 0.2em;
+  margin-left: -0.2em;
+  border-radius: 0.2em;
+}
+
+/* toolbar animation */
+
+.wikibase-toolbar-wrapper, .wikibase-statementview-references-heading, .wikibase-toolbar-container {
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.25s;
+}
+.wikibase-entitytermsview, .wikibase-statementgroupview {
+  &:hover {
+    .wikibase-toolbar-wrapper, .wikibase-statementview-references-heading, .wikibase-toolbar-container {
+    transition: all 1s 0.5s;
+    max-height: 15em;
+    opacity:1;
+    }
+  }
+}
+
+/* wikiverse sitelink list animation */
+
+.wikibase-sitelinkgrouplistview::before {
+  font-size: 1.25em;
+  /* background-color: #990000; */
+  color: white;
+  padding: 0.2em;
+  border-radius: 0.2em;
+  content:'Hover here for wikiverse sitelinks.';
+  animation: 10s infinite alternate fadeinout;
+}
+
+@keyframes fadeinout {
+  0% {
+    background-color: #990000;
+  }
+  50% {
+    background-color: #006699;
+  }
+  100% {
+    background-color: #339966;
+  }
+}
+
+.wikibase-sitelinkgrouplistview {
+  height: 1em;
+  margin-bottom:1em;
+}
+
+.wikibase-sitelinkgrouplistview > div {  opacity: 0;
+
+}
+
+.wikibase-sitelinkgrouplistview:hover,
+.wikibase-sitelinkgrouplistview:hover > div {
+  opacity: 1;
+  height: auto;
+  transition: all 1s;
+}
