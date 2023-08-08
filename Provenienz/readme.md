@@ -1,14 +1,5 @@
 # Streamlit-App zur Recherche von GND-Provenienzmerkmalen
 
 ## Überblick
-Das Python-Script läuft nach Start im Terminal als Webserver im Browser. Die Suche wird via lobid.org auf die GND durchgeführt. Aus den GND-Datensätzen werden die URLs für die Bildquellen geparst und dann die zugehörigen Bilder aus derzeit zwei Quellen geharvestet: dem GBV-Provenienz-Wiki (https://provenienz.gbv.de/) und der Deutschen Fotothek (https://www.deutschefotothek.de/). Um den Prozess etwas zu beschleunigen, werden alle Bilder verkleinert im Unterordner "static" gecacht und bei neuen Suchen daraus geladen. Eine Suche nach mehreren Hundert Provenienzmerkmalen dauert lokal zumindest bei der ersten Abfrage der Bilddaten einige Minuten. <br>
+Diese Anwendung ist ein Python-Script in zwei Versionen: Einer nicht mehr geupdateten Streamlit-Version und einem Jupyter-Notebook. Zweite Version wird bevorzugt, da sie einfacher zu sharen ist. Die Suche wird via lobid.org auf die GND durchgeführt. Aus den GND-Datensätzen werden die URLs für die Bildquellen geparst und dann die zugehörigen Bilder aus derzeit zwei Quellen geharvestet: dem GBV-Provenienz-Wiki (https://provenienz.gbv.de/) und der Deutschen Fotothek (https://www.deutschefotothek.de/). Um den Prozess etwas zu beschleunigen, werden alle Bilder verkleinert im Unterordner "static" gecacht und bei neuen Suchen daraus geladen. Eine Suche nach mehreren Hundert Provenienzmerkmalen dauert lokal zumindest bei der ersten Abfrage der Bilddaten einige Minuten. <br>
 Derzeit gibt es zwei Abfragemodi: Eine reguläre Suche mit Begriffen sowie eine direkte Abfrage von GND-IDs, die als kommagetrennte Liste in den Suchschlitz kopiert werden können.
-
-## Installation
-
-1. Die im Script angegebenen Python-Bibliotheken installieren, sofern nicht vorhanden.
-2. Im Scriptordner einen Unterordner "static" für den Bildcache anlegen
-3. Streamlit-App starten mit dem Befehl streamlit run app.py mit einem Terminal im App-Ordner
-4. Es öffnet sich ein Browser-Fenster mit der Anwendung. Falls nicht, sollte sie unter http://localhost:8501 erreichbar sein.
-
-https://github.com/MichaelMarkert/GND4C/assets/101104547/26da60a7-eb5e-49fa-9777-9b526ffd0e8f
