@@ -196,20 +196,30 @@
     \}")}}
     ],
 "gndo:periodOfActivity": [
-    {{forNonBlank(cells["periodOfActivity"], v, 
-    forEachIndex(cells["periodOfActivity"].value.split("|"), i, v, 
-    "\{" +
-    if(v.split(";")[0] != "§", "\n\"schema\:date\"\:" +
-    jsonize(v.split(";")[0]),'\n\"schema\:date\"\: null')  +
-    "\," +
-    if(v.split(";")[1] != "§", "\n\"rdfs\:literal\"\:" +
-    jsonize(v.split(";")[1]),'\n\"rdfs\:literal\"\: null')  +
-    "\}" +
-    if(cells["periodOfActivity"].value.split("|").length()!=i+1,'\,\n    ',''))
-    , "\{
-    \"schema\:date\"\: null,
-    \"rdfs\:literal\"\: null
-    \}")}}
+    {
+    "gndo:beginningOfPeriod": {
+    {{forNonBlank(cells["beginning"], v, 
+        "\"schema:date\":"  + if(cells['beginning'].value.split(";")[0] != "§",
+        jsonize(cells['beginning'].value.split(";")[0]),'null') + "," + 
+        "\n" +
+        "\"rdfs:literal\":" + if(cells['beginning'].value.split(";")[1] != "§",
+        jsonize(cells['beginning'].value.split(";")[1]),'null')
+    , "\"schema\:date\"\: null,
+    \"rdfs\:literal\"\: null")}}
+        }
+    },
+    {
+    "gndo:endOfPeriod": {
+    {{forNonBlank(cells["end"], v, 
+        "\"schema:date\":"  + if(cells['end'].value.split(";")[0] != "§",
+        jsonize(cells['end'].value.split(";")[0]),'null') + "," + 
+        "\n" +
+        "\"rdfs:literal\":" + if(cells['end'].value.split(";")[1] != "§",
+        jsonize(cells['end'].value.split(";")[1]),'null')
+    , "\"schema\:date\"\: null,
+    \"rdfs\:literal\"\: null")}}
+        }
+    }
     ],
 "gndo:biographicalOrHistoricalInformation": [
     {{forNonBlank(cells["miscellaneousNote"], v, 
