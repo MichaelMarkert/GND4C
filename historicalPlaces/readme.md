@@ -1,0 +1,1 @@
+This Jupyter Notebook contains a script that allows to search for places in OpenHistoricalMap and retrieve the related historical territories the place was in. The response includes wikidata and wikipedia links, and can be downloaded as a.csv file.
